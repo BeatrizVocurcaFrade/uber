@@ -5,13 +5,13 @@ class LocalUser {
   String? _password;
   String? _type;
 
-  LocalUser({
-    id,
-    name,
-    email,
-    password,
-    type,
-  });
+  // LocalUser({
+  //   id,
+  //   name,
+  //   email,
+  //   password,
+  //   type,
+  // });
   
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'name': _name, 'email': _email, 'type': _type};

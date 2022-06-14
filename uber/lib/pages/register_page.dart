@@ -32,12 +32,12 @@ class _RegisterPageState extends State<RegisterPage> {
       if (email.isNotEmpty && email.contains('@')) {
         if (password.isEmpty || password.length > 6) {
           _errorMessage = '';
-          LocalUser user = LocalUser(
-              id: 1,
-              name: name,
-              email: email,
-              password: password,
-              type: isPassenger! ? 'Passageiro' : 'Motorista');
+          LocalUser user = LocalUser();
+          user.email = email;
+          user.name = name;
+          user.password = password;
+          user.type = isPassenger! ? 'Passageiro' : 'Motorista';
+          print(user);
           _registerUser(user);
         } else {
           _errorMessage = 'Preencha a senha! digite mais de 6 caracteres';
@@ -55,7 +55,10 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _registerUser(LocalUser user) {
+    //  Firebase.initializeApp();
+
     FirebaseAuth auth = FirebaseAuth.instance;
+
     FirebaseFirestore db = FirebaseFirestore.instance;
     auth
         .createUserWithEmailAndPassword(
@@ -72,7 +75,12 @@ class _RegisterPageState extends State<RegisterPage> {
               context, '/painel-passageiro', (_) => false);
           break;
       }
+    }).catchError((_) {
+      setState(() {
+        _errorMessage = 'Preencha um email válido';
+      });
     });
+     _errorMessage = '';
   }
 
   @override
@@ -92,11 +100,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 Center(
                     child: Text("Cadastro",
                         style: Theme.of(context).textTheme.headline2)),
-                         const SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
-                     Center(child: Text(_errorMessage, style: const TextStyle(color: Colors.red),)),
-
+                Center(
+                    child: Text(
+                  _errorMessage,
+                  style: const TextStyle(color: Colors.red),
+                )),
                 const SizedBox(
                   height: 30,
                 ),
