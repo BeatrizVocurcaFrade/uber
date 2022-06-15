@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/loading_widget.dart';
 import '../models/local_user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,11 +12,15 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController =
+      TextEditingController(text: 'Beatriz Vocurca Frade');
+  final TextEditingController _emailController =
+      TextEditingController(text: 'beatrizvocurcafrade@gmail.com');
+  final TextEditingController _passwordController =
+      TextEditingController(text: '1234567');
   bool? _passwordVisible;
   bool? isPassenger = true;
+  bool _loading = false;
   String _errorMessage = '';
   @override
   void initState() {
@@ -24,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _validateInputs() {
+    _loading = true;
     String name = _nameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
@@ -37,7 +43,6 @@ class _RegisterPageState extends State<RegisterPage> {
           user.name = name;
           user.password = password;
           user.type = isPassenger! ? 'Passageiro' : 'Motorista';
-          print(user);
           _registerUser(user);
         } else {
           _errorMessage = 'Preencha a senha! digite mais de 6 caracteres';
@@ -64,23 +69,17 @@ class _RegisterPageState extends State<RegisterPage> {
         .createUserWithEmailAndPassword(
             email: user.email!, password: user.password)
         .then((fUser) {
+      _loading = false;
       db.collection('users').doc(fUser.user!.uid).set(user.toMap());
-      switch (user.type) {
-        case 'Motorista':
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/painel-passageiro', (_) => false);
-          break;
-        case 'Passageiro':
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/painel-passageiro', (_) => false);
-          break;
-      }
-    }).catchError((_) {
+      user.id = fUser.user!.uid;
+      Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    }).catchError((e) {
+      _loading = false;
       setState(() {
-        _errorMessage = 'Preencha um email válido';
+        _errorMessage = e.toString();
       });
     });
-     _errorMessage = '';
+    _errorMessage = '';
   }
 
   @override
@@ -101,8 +100,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text("Cadastro",
                         style: Theme.of(context).textTheme.headline2)),
                 const SizedBox(
-                  height: 60,
+                  height: 30,
                 ),
+                _loading ? const LoadingWidget() : Container(),
                 Center(
                     child: Text(
                   _errorMessage,
@@ -158,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Row(
                   children: [
-                    const Text('Passageiro'),
+                    const Text('Motorista'),
                     Switch(
                       value: isPassenger!,
                       activeColor: Colors.blue,
@@ -168,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                       },
                     ),
-                    const Text('Motorista'),
+                    const Text('Passageiro'),
                   ],
                 ),
                 const SizedBox(

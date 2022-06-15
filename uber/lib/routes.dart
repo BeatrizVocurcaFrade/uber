@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uber/pages/driver_painel.dart';
+import 'package:uber/pages/driver_panel.dart';
 import 'package:uber/pages/login_page.dart';
-import 'package:uber/pages/passanger_painel.dart';
+import 'package:uber/pages/passanger_panel.dart';
 import 'package:uber/pages/register_page.dart';
 
 class Routes {
@@ -11,10 +11,10 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case '/cadastro':
         return MaterialPageRoute(builder: (_) => const RegisterPage());
-      case '/painel-passageiro':
-        return MaterialPageRoute(builder: (_) => const PassengerPainel());
-      case '/painel-motorista':
-        return MaterialPageRoute(builder: (_) => const DriverPainel());
+      case '/panel-passageiro':
+        return MaterialPageRoute(builder: (_) => const PassengerPanel());
+      case '/panel-motorista':
+        return MaterialPageRoute(builder: (_) => const DriverPanel());
 
       default:
         return _erroRota();
