@@ -129,8 +129,68 @@ class _PassengerPanelState extends State<PassengerPanel> {
               bottom: 10,
               child: FloatingActionButton(
                 onPressed: () {},
-                child: Icon(Icons.car_crash_outlined),
+                child: const Icon(Icons.car_crash_outlined),
               )),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(width: 2, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(3)),
+                child: const TextField(
+                  readOnly: true,
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                      icon: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.location_on,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      hintText: "Meu Local",
+                      hintStyle: TextStyle(color: Colors.black),
+                      ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 60,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(width: 2, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(3)),
+                child: const TextField(
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                      icon: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.location_on,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      hintText: "Meu Local",
+                      hintStyle: TextStyle(color: Colors.black)),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
