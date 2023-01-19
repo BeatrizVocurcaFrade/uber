@@ -15,7 +15,7 @@ _logOutUser() async {
 
 class _DriverPanelState extends State<DriverPanel> {
   List<String> menuItens = ['Configurações', 'Deslogar'];
-
+  String v = '';
   _selectMenuItem(String item) {
     switch (item) {
       case 'Configurações':
