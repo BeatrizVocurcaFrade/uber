@@ -62,13 +62,13 @@ jobs:
           channel: "stable"
       - run: flutter clean
       - run: flutter pub get
-      - run: flutter build appbundle --flavor universoagv -t lib/mains/main_universo_agv.dart
-      - run: flutter build appbundle --flavor avseg -t lib/mains/main_avseg_auto.dart
-      - run: flutter build appbundle --flavor cartruck -t lib/mains/main_cartruck.dart
-      - run: flutter build appbundle --flavor gpv -t lib/mains/main_gpv_brasil.dart
-      - run: flutter build appbundle --flavor infinity -t lib/mains/main_infinity.dart
-      - run: flutter build appbundle --flavor magen -t lib/mains/main_magen.dart
-      - run: flutter build appbundle --flavor seveauto -t lib/mains/main_seve_auto.dart
+      # - run: flutter build appbundle --flavor universoagv -t lib/mains/main_universo_agv.dart
+      # - run: flutter build appbundle --flavor avseg -t lib/mains/main_avseg_auto.dart
+      # - run: flutter build appbundle --flavor cartruck -t lib/mains/main_cartruck.dart
+      # - run: flutter build appbundle --flavor gpv -t lib/mains/main_gpv_brasil.dart
+      # - run: flutter build appbundle --flavor infinity -t lib/mains/main_infinity.dart
+      # - run: flutter build appbundle --flavor magen -t lib/mains/main_magen.dart
+      - run: flutter build appbundle lib/main.dart
       - name: Upload appbundle
         uses: actions/upload-artifact@v2.1.4
         with:
