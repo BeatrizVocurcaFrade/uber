@@ -16,9 +16,8 @@ import 'package:flutter/foundation.dart'
 /// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    if (kIsWeb) {
-      return web;
-    }
+    if (kIsWeb) return web;
+
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
@@ -67,7 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1031933187860',
     projectId: 'uber-60ada',
     storageBucket: 'uber-60ada.appspot.com',
-    iosClientId: '1031933187860-gqhovh49baq5f9n5bgn4muae0ricf4uj.apps.googleusercontent.com',
+    iosClientId:
+        '1031933187860-gqhovh49baq5f9n5bgn4muae0ricf4uj.apps.googleusercontent.com',
     iosBundleId: 'com.example.uber',
   );
 
@@ -77,7 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1031933187860',
     projectId: 'uber-60ada',
     storageBucket: 'uber-60ada.appspot.com',
-    iosClientId: '1031933187860-gqhovh49baq5f9n5bgn4muae0ricf4uj.apps.googleusercontent.com',
+    iosClientId:
+        '1031933187860-gqhovh49baq5f9n5bgn4muae0ricf4uj.apps.googleusercontent.com',
     iosBundleId: 'com.example.uber',
   );
 }
